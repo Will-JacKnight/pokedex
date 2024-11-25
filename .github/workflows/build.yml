@@ -1,0 +1,47 @@
+name: Build
+on: [push]
+jobs:
+  python-formatting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: black formatting
+        run: black .
+      - name: Run flake8
+        run: flake8 --max-line-length 99 .
+
+  unit-testing:
+    needs: python-formatting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run pytest
+        run: pytest src/app_test.py
+
+  deploy-to-impaas:
+    needs: unit-testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: ImPaaS-Deploy
+        uses: /impaas/impaas-deploy@v3
+        with:
+          app-name: jw1524-sse-app
+          deployment-token: ${{ secrets.IMPAAS_DEPLOY_TOKEN }}
+          method: PLATFORM
