@@ -15,7 +15,7 @@ jobs:
       - name: black formatting
         run: black .
       - name: Run flake8
-        run: flake8 --max-line-length 99 .
+        run: flake8 --max-line-length 120 .
 
   unit-testing:
     needs: python-formatting
