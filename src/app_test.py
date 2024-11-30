@@ -1,6 +1,6 @@
 import pytest
 
-from src.app import get_pokemon_data
+from app import get_pokemon_data
 
 
 # Test the function with an example Pokémon (e.g., "Pikachu")
