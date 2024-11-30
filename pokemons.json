@@ -1,0 +1,457 @@
+{
+  "0": {
+    "abilities": [
+      "overgrow",
+      "chlorophyll"
+    ],
+    "attack": 49,
+    "defense": 49,
+    "description": "A strange seed was planted on its back at birth. The plant sprouts and grows with this POK\u00e9MON.",
+    "evolution_chain": [
+      "bulbasaur",
+      "ivysaur",
+      "venusaur"
+    ],
+    "hp": 45,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+    "moves": [
+      "razor-wind",
+      "swords-dance",
+      "cut",
+      "bind"
+    ],
+    "name": "bulbasaur",
+    "speed": 45,
+    "types": [
+      "grass",
+      "poison"
+    ],
+    "weight": 69
+  },
+  "3": {
+    "abilities": [
+      "blaze",
+      "solar-power"
+    ],
+    "attack": 52,
+    "defense": 43,
+    "description": "Obviously prefers hot places. When it rains, steam is said to spout from the tip of its tail.",
+    "evolution_chain": [
+      "charmander",
+      "charmeleon",
+      "charizard"
+    ],
+    "hp": 39,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
+    "moves": [
+      "mega-punch",
+      "fire-punch",
+      "thunder-punch",
+      "scratch"
+    ],
+    "name": "charmander",
+    "speed": 65,
+    "types": [
+      "fire"
+    ],
+    "weight": 85
+  },
+  "6": {
+    "abilities": [
+      "torrent",
+      "rain-dish"
+    ],
+    "attack": 48,
+    "defense": 65,
+    "description": "After birth, its back swells and hardens into a shell. Powerfully sprays foam from its mouth.",
+    "evolution_chain": [
+      "squirtle",
+      "wartortle",
+      "blastoise"
+    ],
+    "hp": 44,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
+    "moves": [
+      "mega-punch",
+      "ice-punch",
+      "mega-kick",
+      "headbutt"
+    ],
+    "name": "squirtle",
+    "speed": 43,
+    "types": [
+      "water"
+    ],
+    "weight": 90
+  },
+  "9": {
+    "abilities": [
+      "shield-dust",
+      "run-away"
+    ],
+    "attack": 30,
+    "defense": 35,
+    "description": "Its short feet are tipped with suction pads that enable it to tirelessly climb slopes and walls.",
+    "evolution_chain": [
+      "caterpie",
+      "metapod",
+      "butterfree"
+    ],
+    "hp": 45,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png",
+    "moves": [
+      "tackle",
+      "string-shot",
+      "snore",
+      "bug-bite"
+    ],
+    "name": "caterpie",
+    "speed": 45,
+    "types": [
+      "bug"
+    ],
+    "weight": 29
+  },
+  "12": {
+    "abilities": [
+      "shield-dust",
+      "run-away"
+    ],
+    "attack": 35,
+    "defense": 30,
+    "description": "Often found in forests, eating leaves. It has a sharp venomous stinger on its head.",
+    "evolution_chain": [
+      "weedle",
+      "kakuna",
+      "beedrill"
+    ],
+    "hp": 40,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/13.png",
+    "moves": [
+      "poison-sting",
+      "string-shot",
+      "bug-bite",
+      "electroweb"
+    ],
+    "name": "weedle",
+    "speed": 50,
+    "types": [
+      "bug",
+      "poison"
+    ],
+    "weight": 32
+  },
+  "15": {
+    "abilities": [
+      "keen-eye",
+      "tangled-feet",
+      "big-pecks"
+    ],
+    "attack": 45,
+    "defense": 40,
+    "description": "A common sight in forests and woods. It flaps its wings at ground level to kick up blinding sand.",
+    "evolution_chain": [
+      "pidgey",
+      "pidgeotto",
+      "pidgeot"
+    ],
+    "hp": 40,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/16.png",
+    "moves": [
+      "razor-wind",
+      "gust",
+      "wing-attack",
+      "whirlwind"
+    ],
+    "name": "pidgey",
+    "speed": 56,
+    "types": [
+      "normal",
+      "flying"
+    ],
+    "weight": 18
+  },
+  "18": {
+    "abilities": [
+      "run-away",
+      "guts",
+      "hustle"
+    ],
+    "attack": 56,
+    "defense": 35,
+    "description": "Bites anything when it attacks. Small and very quick, it is a common sight in many places.",
+    "evolution_chain": [
+      "rattata",
+      "raticate"
+    ],
+    "hp": 30,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/19.png",
+    "moves": [
+      "cut",
+      "headbutt",
+      "tackle",
+      "body-slam"
+    ],
+    "name": "rattata",
+    "speed": 72,
+    "types": [
+      "normal"
+    ],
+    "weight": 35
+  },
+  "20": {
+    "abilities": [
+      "keen-eye",
+      "sniper"
+    ],
+    "attack": 60,
+    "defense": 30,
+    "description": "It flaps its small wings busily to fly. Using its beak, it searches in grass for prey.",
+    "evolution_chain": [
+      "spearow",
+      "fearow"
+    ],
+    "hp": 40,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/21.png",
+    "moves": [
+      "razor-wind",
+      "wing-attack",
+      "whirlwind",
+      "fly"
+    ],
+    "name": "spearow",
+    "speed": 70,
+    "types": [
+      "normal",
+      "flying"
+    ],
+    "weight": 20
+  },
+  "22": {
+    "abilities": [
+      "intimidate",
+      "shed-skin",
+      "unnerve"
+    ],
+    "attack": 60,
+    "defense": 44,
+    "description": "Moves silently and stealthily. Eats the eggs of birds, such as PIDGEY and SPEAROW, whole.",
+    "evolution_chain": [
+      "ekans",
+      "arbok"
+    ],
+    "hp": 35,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/23.png",
+    "moves": [
+      "bind",
+      "slam",
+      "headbutt",
+      "body-slam"
+    ],
+    "name": "ekans",
+    "speed": 55,
+    "types": [
+      "poison"
+    ],
+    "weight": 69
+  },
+  "24": {
+    "abilities": [
+      "static",
+      "lightning-rod"
+    ],
+    "attack": 55,
+    "defense": 40,
+    "description": "When several of these POK\u00e9MON gather, their electricity could build and cause lightning storms.",
+    "evolution_chain": [
+      "pichu",
+      "pikachu",
+      "raichu"
+    ],
+    "hp": 35,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
+    "moves": [
+      "mega-punch",
+      "pay-day",
+      "thunder-punch",
+      "slam"
+    ],
+    "name": "pikachu",
+    "speed": 90,
+    "types": [
+      "electric"
+    ],
+    "weight": 60
+  },
+  "26": {
+    "abilities": [
+      "sand-veil",
+      "sand-rush"
+    ],
+    "attack": 75,
+    "defense": 85,
+    "description": "Burrows deep underground in arid locations far from water. It only emerges to hunt for food.",
+    "evolution_chain": [
+      "sandshrew",
+      "sandslash"
+    ],
+    "hp": 50,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/27.png",
+    "moves": [
+      "scratch",
+      "swords-dance",
+      "cut",
+      "sand-attack"
+    ],
+    "name": "sandshrew",
+    "speed": 40,
+    "types": [
+      "ground"
+    ],
+    "weight": 120
+  },
+  "28": {
+    "abilities": [
+      "poison-point",
+      "rivalry",
+      "hustle"
+    ],
+    "attack": 47,
+    "defense": 52,
+    "description": "Although small, its venomous barbs render this POK\u00e9MON dangerous. The female has smaller horns.",
+    "evolution_chain": [
+      "nidoran-f",
+      "nidorina",
+      "nidoqueen"
+    ],
+    "hp": 55,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/29.png",
+    "moves": [
+      "scratch",
+      "cut",
+      "double-kick",
+      "headbutt"
+    ],
+    "name": "nidoran-f",
+    "speed": 41,
+    "types": [
+      "poison"
+    ],
+    "weight": 70
+  },
+  "31": {
+    "abilities": [
+      "poison-point",
+      "rivalry",
+      "hustle"
+    ],
+    "attack": 57,
+    "defense": 40,
+    "description": "Stiffens its ears to sense danger. The larger its horns, the more powerful its secreted venom.",
+    "evolution_chain": [
+      "nidoran-m",
+      "nidorino",
+      "nidoking"
+    ],
+    "hp": 46,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/32.png",
+    "moves": [
+      "cut",
+      "double-kick",
+      "headbutt",
+      "horn-attack"
+    ],
+    "name": "nidoran-m",
+    "speed": 50,
+    "types": [
+      "poison"
+    ],
+    "weight": 90
+  },
+  "34": {
+    "abilities": [
+      "cute-charm",
+      "magic-guard",
+      "friend-guard"
+    ],
+    "attack": 45,
+    "defense": 48,
+    "description": "Its magical and cute appeal has many admirers. It is rare and found only in certain areas.",
+    "evolution_chain": [
+      "cleffa",
+      "clefairy",
+      "clefable"
+    ],
+    "hp": 70,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/35.png",
+    "moves": [
+      "pound",
+      "double-slap",
+      "mega-punch",
+      "fire-punch"
+    ],
+    "name": "clefairy",
+    "speed": 35,
+    "types": [
+      "fairy"
+    ],
+    "weight": 75
+  },
+  "36": {
+    "abilities": [
+      "flash-fire",
+      "drought"
+    ],
+    "attack": 41,
+    "defense": 40,
+    "description": "At the time of birth, it has just one tail. The tail splits from its tip as it grows older.",
+    "evolution_chain": [
+      "vulpix",
+      "ninetales"
+    ],
+    "hp": 38,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/37.png",
+    "moves": [
+      "headbutt",
+      "tackle",
+      "body-slam",
+      "take-down"
+    ],
+    "name": "vulpix",
+    "speed": 65,
+    "types": [
+      "fire"
+    ],
+    "weight": 99
+  },
+  "38": {
+    "abilities": [
+      "cute-charm",
+      "competitive",
+      "friend-guard"
+    ],
+    "attack": 45,
+    "defense": 20,
+    "description": "When its huge eyes light up, it sings a mysteriously soothing melody that lulls its enemies to sleep.",
+    "evolution_chain": [
+      "igglybuff",
+      "jigglypuff",
+      "wigglytuff"
+    ],
+    "hp": 115,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png",
+    "moves": [
+      "pound",
+      "double-slap",
+      "mega-punch",
+      "fire-punch"
+    ],
+    "name": "jigglypuff",
+    "speed": 20,
+    "types": [
+      "normal",
+      "fairy"
+    ],
+    "weight": 55
+  }
+}
