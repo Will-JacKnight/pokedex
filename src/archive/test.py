@@ -3,7 +3,9 @@ from supabase import create_client
 
 #Connect to supabase (HARDCODED CREDENTIALS) 
 SUPABASE_URL = "https://jsvmdeqisnnopuphusbl.supabase.co"
-SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impzdm1kZXFpc25ub3B1cGh1c2JsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI2NDk0NTUsImV4cCI6MjA0ODIyNTQ1NX0.UD5kGfPAljLWgolwvY41Dq8fMkHiitDMX9nhQjkEYy4"
+SUPABASE_KEY = ("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6"
+				"Impzdm1kZXFpc25ub3B1cGh1c2JsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI2NDk0NT"
+				"UsImV4cCI6MjA0ODIyNTQ1NX0.UD5kGfPAljLWgolwvY41Dq8fMkHiitDMX9nhQjkEYy4")
 
 #Initialise Supabase client 
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
