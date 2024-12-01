@@ -65,6 +65,24 @@ def favorite_pokemon():
     return jsonify({"message": f"{pokemon_name} added to favorites"}), 200
 
 
+@app.route('/favorites/<user_id>', methods=['GET'])
+def list_favorites(user_id):
+		try:
+				#Query the favorites table for the user's Pokémon
+				response = supabase_client.table("favorites").select("pokemon_name").eq("user_id", user_id).execute()
+
+				if response.data:
+						#Return the list of Pokémon names
+						#fav is a temporary variable which represents one favorite pokemon at a time from response.data, and allows us to list them one by one
+						return jsonify({"favorites": [fav['pokemon_name'] for fav in response.data]}), 200
+				else:
+						#No favorites found for the user
+						return jsonify({"favorites": []}), 200
+		except Exception as e:
+				#Handle unexpected errors
+				return jsonify({"error": str(e)}), 500
+
+
 # Function to fetch Pokémon name and types from the PokeAPI
 def get_pokemon_data(pokemon_name):
     url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name.lower()}"
