@@ -83,6 +83,31 @@ def list_favorites(user_id):
 				return jsonify({"error": str(e)}), 500
 
 
+@app.route('/favorite', methods=['DELETE'])
+def remove_favorite():
+		data = request.json
+		user_id = data.get('user_id')
+		pokemon_name = data.get('pokemon_name')
+
+		#Validate input
+		if not user_id or not pokemon_name:
+				return jsonify({"error": "User ID and Pokémon name are required"}), 400
+		
+		try:
+				#Delete the favorite from the table
+				response = supabase_client.table("favorites").delete().eq("user_id", user_id).eq("pokemon_name", pokemon_name).execute()
+
+				if response.data:
+						#Matching favorite exists so successful deletion
+						return jsonify({"message": f"{pokemon_name} removed from favorites"}), 200
+				else:
+						#No matching favorite found so no deletion
+						return jsonify({"error": "Favorite not found"}), 404
+		except Exception as e:
+				#Handle unexpected errors
+				return jsonify({"error": str(e)}), 500
+
+
 # Function to fetch Pokémon name and types from the PokeAPI
 def get_pokemon_data(pokemon_name):
     url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name.lower()}"
