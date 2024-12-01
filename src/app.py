@@ -46,6 +46,25 @@ def login_page():
     return jsonify({"message": "Login successful", "user": {"id": user['id'], "username": user['username']}}), 200
 
 
+@app.route('/favorite', methods=['POST'])
+def favorite_pokemon():
+    data = request.json
+    user_id = data.get('user_id')
+    pokemon_name = data.get('pokemon_name')
+
+    if not user_id or not pokemon_name:
+        return jsonify({"error": "User ID and Pokemon name are required"}), 400
+
+    # Check if the Pokémon is already a favorite
+    response = supabase_client.table("favorites").select("*").eq("user_id", user_id).eq("pokemon_name", pokemon_name).execute()
+    if response.data:
+        return jsonify({"error": "This Pokemon is already in your favorites"}), 400
+
+    # Add to favorites
+    response = supabase_client.table("favorites").insert({"user_id": user_id, "pokemon_name": pokemon_name}).execute()
+    return jsonify({"message": f"{pokemon_name} added to favorites"}), 200
+
+
 # Function to fetch Pokémon name and types from the PokeAPI
 def get_pokemon_data(pokemon_name):
     url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name.lower()}"
