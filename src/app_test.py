@@ -34,10 +34,35 @@ def test_Pokemon_data_fetched_through_API(pokemon_name, types, hp):
     #     print("Pokémon data not found.")
 
 
-# test if username and password match with the record in database
+# test if the given username and password match with the record in database
 @pytest.mark.parametrize("username, password", [
-    ("test_user", "test_<PASSWORD>"),
-    ("pokemaster", "pokepoke123")
-], ids=["test_user"])
+    ("test_user", "hashed_password"),
+    ("another_user", "another_password"),
+    ("last_user", "last_password"),
+], ids=["test_user", "another_user", "last_user"])
 def test_if_username_password_match(username, password):
-    pass
+    response = supabase_client.table("users").select("*").eq("username", username).execute()
+    user = response.data[0]
+    assert user['password_hash'] == password
+
+
+# test adding a new favorite pokemon to a user and remove that after the test
+@pytest.mark.parametrize("user_id, pokemon_name", [
+    ("03d6b91e-5e5a-4530-bbea-a4ea5472e707", "Pikachu")
+], ids=["test_user"])
+def test_adding_favorite_pokemon_check_if_stored_in_database(user_id, pokemon_name):
+    # remove old favorites if exists
+    (supabase_client.table("favorites")
+     .delete().eq("user_id", user_id).eq("pokemon_name",pokemon_name).execute())
+
+    # add new favorite pokemon to the test_user
+    (supabase_client.table("favorites")
+     .insert({"user_id": user_id, "pokemon_name": pokemon_name}).execute())
+
+    # fetch the list of favorite pokemon for the given user
+    response = (supabase_client.table("favorites")
+                .select("pokemon_name").eq("user_id", user_id).execute())
+
+    # check if the new favorite is in the list
+    favorite_pokemon_names = [fav["pokemon_name"] for fav in response.data]
+    assert pokemon_name in favorite_pokemon_names
