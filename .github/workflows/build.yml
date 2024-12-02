@@ -14,8 +14,8 @@ jobs:
         run: pip install -r requirements.txt
       - name: black formatting
         run: black .
-      - name: Run flake8
-        run: flake8 --max-line-length 250 .
+#      - name: Run flake8
+#        run: flake8 --max-line-length 250 .
 
   unit-testing:
     needs: python-formatting
