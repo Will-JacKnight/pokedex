@@ -10,15 +10,25 @@ function Home() {
 
   useEffect(() => {
     // Fetch data from Flask API using fetch
-    fetch('http://127.0.0.1:5000/api/pokemons')
+    if (sessionStorage.getItem('pokemons')) {
+      setData(JSON.parse(sessionStorage.getItem('pokemons')));
+    }
+    else {
+      fetch('http://127.0.0.1:5000/api/pokemons')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         return response.json();
       })
-      .then(rec_data => setData(Object.values(rec_data))) // convert dictionary to array and store in data state
+      .then(rec_data => {
+        let arrData = Object.values(rec_data);
+        setData(Object.values(arrData)); // convert dictionary to array and store in data state
+        sessionStorage.setItem('pokemons', JSON.stringify(arrData));
+      })
       .catch(error => console.error('Error fetching data:', error));
+    }
+    
   }, []);
 
   const pokemonEl = data?.map((pokemon, index) => {
