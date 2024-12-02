@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-import requests
+import requests, bcrypt
 from supabase import create_client
 
 #Connect to supabase (HARDCODED CREDENTIALS)
@@ -20,6 +20,28 @@ def home_page():
     return render_template("login.html")
 
 
+@app.route('/register', methods=['POST'])
+def register():
+    data = request.json
+    username = data.get('username')
+    password = data.get('password')
+
+    if not username or not password: 
+        return jsonify({"error": "Username and password are required"}), 400
+
+    response = supabase_client.table("users").select("*").eq("username", username).execute()
+    if response.data:
+        return jsonify({"error": "Username already exists"}), 400
+
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+
+    try:
+        supabase_client.table("users").insert({"username": username, "password": hashed_password}).execute()
+        return jsonify({"message": "User registered successfully"}), 201
+    except Exception as e: 
+        return jsonify({"error": str(e)}), 500 
+
+
 @app.route('/login', methods=['POST'])
 def login_page():
     username = request.json.get('username')
@@ -37,9 +59,10 @@ def login_page():
     if not user:
         return jsonify({"error": "Invalid username or password"}), 401
 
-    # Verify the password
-    if password != user['password_hash']:
+  # Verify the password
+    if not bcrypt.checkpw(password.encode('utf-8'), user['password'].encode('utf-8')):
         return jsonify({"error": "Invalid username or password"}), 401
+
 
     # Successful login
     return jsonify({"message": "Login successful", "user": {"id": user['id'], "username": user['username']}}), 200
