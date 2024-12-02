@@ -43,7 +43,7 @@ def test_Pokemon_data_fetched_through_API(pokemon_name, types, hp):
 def test_if_username_password_match(username, password):
     response = supabase_client.table("users").select("*").eq("username", username).execute()
     user = response.data[0]
-    assert user['password_hash'] == password
+    assert user["password"] == password
 
 
 # test adding a new favorite pokemon to a user and remove that after the test
