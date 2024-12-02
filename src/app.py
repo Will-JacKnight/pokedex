@@ -20,12 +20,22 @@ def home_page():
     return render_template("login.html")
 
 
+@app.route('/register', methods=["GET"])
+def show_signup_page():
+    return render_template("signup_test.html")
+
+
+@app.route('/login', methods=["GET"])
+def show_login_page():
+    return  render_template("login_test.html")
+
+
 @app.route('/register', methods=['POST'])
-def register():
-    data = request.json
+def register_user():
+    data = request.form
     username = data.get('username')
     password = data.get('password')
-
+    
     if not username or not password: 
         return jsonify({"error": "Username and password are required"}), 400
 
@@ -43,9 +53,9 @@ def register():
 
 
 @app.route('/login', methods=['POST'])
-def login_page():
-    username = request.json.get('username')
-    password = request.json.get('password')
+def login_user():
+    username = request.form.get('username')
+    password = request.form.get('password')
 
     # Check if username and password are provided
     if not username or not password:
