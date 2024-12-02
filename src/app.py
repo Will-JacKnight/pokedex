@@ -17,30 +17,29 @@ app = Flask(__name__)
 # Home page
 @app.route("/")
 def home_page():
-    return render_template("index.html")
+    return render_template("login.html")
 
 
 @app.route('/login', methods=['POST'])
 def login_page():
-    data = request.json
-    email = data.get('email')
-    password = data.get('password')
+    username = request.json.get('username')
+    password = request.json.get('password')
 
-    # Check if email and password are provided
-    if not email or not password:
-        return jsonify({"error": "Email and password are required"}), 400
+    # Check if username and password are provided
+    if not username or not password:
+        return jsonify({"error": "username and password are required"}), 400
 
     # Query the database for the user
-    response = supabase_client.table("users").select("*").eq("username", email).execute()
+    response = supabase_client.table("users").select("*").eq("username", username).execute()
     user = response.data[0] if response.data else None
 
     # If user does not exist
     if not user:
-        return jsonify({"error": "Invalid email or password"}), 401
+        return jsonify({"error": "Invalid username or password"}), 401
 
     # Verify the password
     if password != user['password_hash']:
-        return jsonify({"error": "Invalid email or password"}), 401
+        return jsonify({"error": "Invalid username or password"}), 401
 
     # Successful login
     return jsonify({"message": "Login successful", "user": {"id": user['id'], "username": user['username']}}), 200
@@ -67,45 +66,45 @@ def favorite_pokemon():
 
 @app.route('/favorites/<user_id>', methods=['GET'])
 def list_favorites(user_id):
-		try:
-				#Query the favorites table for the user's Pokémon
-				response = supabase_client.table("favorites").select("pokemon_name").eq("user_id", user_id).execute()
+    try:
+        #Query the favorites table for the user's Pokémon
+        response = supabase_client.table("favorites").select("pokemon_name").eq("user_id", user_id).execute()
 
-				if response.data:
-						#Return the list of Pokémon names
-						#fav is a temporary variable which represents one favorite pokemon at a time from response.data, and allows us to list them one by one
-						return jsonify({"favorites": [fav['pokemon_name'] for fav in response.data]}), 200
-				else:
-						#No favorites found for the user
-						return jsonify({"favorites": []}), 200
-		except Exception as e:
-				#Handle unexpected errors
-				return jsonify({"error": str(e)}), 500
+        if response.data:
+                #Return the list of Pokémon names
+                #fav is a temporary variable which represents one favorite Pokemon at a time from response.data, and allows us to list them one by one
+                return jsonify({"favorites": [fav['pokemon_name'] for fav in response.data]}), 200
+        else:
+                #No favorites found for the user
+                return jsonify({"favorites": []}), 200
+    except Exception as e:
+        #Handle unexpected errors
+        return jsonify({"error": str(e)}), 500
 
 
 @app.route('/favorite', methods=['DELETE'])
 def remove_favorite():
-		data = request.json
-		user_id = data.get('user_id')
-		pokemon_name = data.get('pokemon_name')
+    data = request.json
+    user_id = data.get('user_id')
+    pokemon_name = data.get('pokemon_name')
 
-		#Validate input
-		if not user_id or not pokemon_name:
-				return jsonify({"error": "User ID and Pokémon name are required"}), 400
-		
-		try:
-				#Delete the favorite from the table
-				response = supabase_client.table("favorites").delete().eq("user_id", user_id).eq("pokemon_name", pokemon_name).execute()
+    #Validate input
+    if not user_id or not pokemon_name:
+        return jsonify({"error": "User ID and Pokémon name are required"}), 400
 
-				if response.data:
-						#Matching favorite exists so successful deletion
-						return jsonify({"message": f"{pokemon_name} removed from favorites"}), 200
-				else:
-						#No matching favorite found so no deletion
-						return jsonify({"error": "Favorite not found"}), 404
-		except Exception as e:
-				#Handle unexpected errors
-				return jsonify({"error": str(e)}), 500
+    try:
+        #Delete the favorite from the table
+        response = supabase_client.table("favorites").delete().eq("user_id", user_id).eq("pokemon_name", pokemon_name).execute()
+
+        if response.data:
+                #Matching favorite exists so successful deletion
+                return jsonify({"message": f"{pokemon_name} removed from favorites"}), 200
+        else:
+                #No matching favorite found so no deletion
+                return jsonify({"error": "Favorite not found"}), 404
+    except Exception as e:
+            #Handle unexpected errors
+            return jsonify({"error": str(e)}), 500
 
 
 # Function to fetch Pokémon name and types from the PokeAPI
