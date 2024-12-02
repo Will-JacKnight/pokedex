@@ -4,6 +4,7 @@ import PokemonCard from '../components/PokemonCard';
 import { Link } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 
+
 function Home() {
   const [data, setData] = useState([]);
 

@@ -4,7 +4,7 @@ import titleImg from '../images/pokemon_logo.png';
 import PokemonCard from '../components/PokemonCard';
 import eveolutionImg from '../images/evolutions-text.png';
 import icons from '../icons';
-
+import homeImg from '../images/home-icon-silhouette.svg';
 
 function Details() {
   const [data, setData] = useState([]);
@@ -65,39 +65,43 @@ function Details() {
 
   return (
     <>
-      <img src={titleImg} alt='title' className='title-img'/>
-      <div className='pokemon-profile'>
-        <h2>{currentPokemon?.name[0].toUpperCase() + currentPokemon?.name.slice(1)}</h2>
-        <h3 className='hp hp-profile'>HP: {currentPokemon?.hp}</h3>
-        <div className='types-container'>{typeEl}</div>
-        <img src={currentPokemon?.image} alt='title' className='pokemon-img'/>
-        <p className='pokemon-description'>{currentPokemon?.description.replace(/\f/g, ' ')}</p>
-        <div>
-          <div className='pokemon-stats'>
-            <p><strong>ATT</strong>&nbsp;&nbsp;{currentPokemon?.attack}</p> 
-            <p><strong>DEF</strong>&nbsp;&nbsp;{currentPokemon?.defense}</p>
+      <div className="container">
+        <Link to='/'><img src={homeImg} className='home-icon' alt="home icon" /></Link>
+        <img src={titleImg} alt='title' className='title-img'/>
+        <div className='pokemon-profile'>
+          <h2>{currentPokemon?.name[0].toUpperCase() + currentPokemon?.name.slice(1)}</h2>
+          <h3 className='hp hp-profile'>HP: {currentPokemon?.hp}</h3>
+          <div className='types-container'>{typeEl}</div>
+          <img src={currentPokemon?.image} alt='title' className='pokemon-img'/>
+          <p className='pokemon-description'>{currentPokemon?.description.replace(/\f/g, ' ')}</p>
+          <div>
+            <div className='pokemon-stats'>
+              <p><strong>ATT</strong>&nbsp;&nbsp;{currentPokemon?.attack}</p> 
+              <p><strong>DEF</strong>&nbsp;&nbsp;{currentPokemon?.defense}</p>
+            </div>
+            <div className='pokemon-stats'>
+              <p><strong>WEIGHT</strong>&nbsp;&nbsp;{currentPokemon?.weight}</p>
+              <p><strong>SPEED</strong>&nbsp;&nbsp;{currentPokemon?.speed}</p>
+            </div>
+            <div className="pokemon-stats">
+              <p><strong>EVOLUTION LV.</strong>&nbsp;&nbsp;{currentPokemon?.level}</p>
+            </div>
           </div>
-          <div className='pokemon-stats'>
-            <p><strong>WEIGHT</strong>&nbsp;&nbsp;{currentPokemon?.weight}</p>
-            <p><strong>SPEED</strong>&nbsp;&nbsp;{currentPokemon?.speed}</p>
+          <h5 className='abilities-title'>Abilities</h5>
+          <div className='abilities-container'>
+            {abilitiesEl}
           </div>
-          <div className="pokemon-stats">
-            <p><strong>EVOLUTION LV.</strong>&nbsp;&nbsp;{currentPokemon?.level}</p>
+          <h5 className='moves-title'>Moves</h5>
+          <div className='moves-container'>
+            {movesEl}
           </div>
         </div>
-        <h5 className='abilities-title'>Abilities</h5>
-        <div className='abilities-container'>
-          {abilitiesEl}
-        </div>
-        <h5 className='moves-title'>Moves</h5>
-        <div className='moves-container'>
-          {movesEl}
+        <img src={eveolutionImg} alt='title' className='title-img'/>
+        <div className='pokemon-poster-list'>
+          {pokemonEl}
         </div>
       </div>
-      <img src={eveolutionImg} alt='title' className='title-img'/>
-      <div className='pokemon-poster-list'>
-        {pokemonEl}
-      </div>
+      
     </>
   )
 
