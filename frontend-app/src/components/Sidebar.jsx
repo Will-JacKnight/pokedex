@@ -41,21 +41,16 @@ const Sidebar = () => {
     }
   };
 
-  console.log(favourite);
-
   const pokemonEl = favourite?.map((pokemon, index) => {
     return (
-      // <Link key={index} to={`/details/${pokemon.name}`}>
         <PokemonCard pokemon={pokemon} index={index} sidebar={true}>
         </PokemonCard>
-      // </Link>
     );
   })
 
   return (
     <div>
         <img src={heartImg} alt="heart img" onClick={toggleSidebar} className="toggle-button" />
-
         <div className={`sidebar ${isOpen ? "open" : ""}`}>
             <h2>Your Pokemons</h2>
             {favourite.length === 0 && <p>You haven't added any pokemons to your favourites</p>}

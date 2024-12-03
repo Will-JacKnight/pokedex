@@ -102,7 +102,7 @@ def favourite():
         
         else:
                 #No favorites found for the user
-                return jsonify({"favorites": []}), 200
+                return jsonify({}), 200
     except Exception as e:
         #Handle unexpected errors
         return jsonify({"error": str(e)}), 500

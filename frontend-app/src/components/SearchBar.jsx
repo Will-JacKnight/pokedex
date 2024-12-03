@@ -18,7 +18,7 @@ export default function SearchBar() {
         e.preventDefault()
         setSearchQuery("")
         sessionStorage.setItem("searchQuery", searchQuery)
-        navigate(`/details/${searchQuery}`, {refresh:  Math.random })
+        navigate(`/details/${searchQuery.toLowerCase()}`)
         // The navigation state with a random number, is used solely to force a re-render of the results page.
         // This is necessary when the user is searching for movie/show directly from the results page
     }

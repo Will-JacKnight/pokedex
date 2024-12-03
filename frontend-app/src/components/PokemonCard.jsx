@@ -92,17 +92,23 @@ function PokemonCard({pokemon, index, level=false, sidebar=false}) {
         clickTimeout = null;
       }
       doubleClickRef.current = true; // Mark that a double-click occurred
-      console.log("Double click detected");
-      addFavourite(pokemon.name);
+      if(sessionStorage.getItem('access_token')) {
+        addFavourite(pokemon.name);
+      }
+      else {
+        alert("Please login to add pokemons to your favourites");
+      }
       setTimeout(() => {
         doubleClickRef.current = false; // Reset double-click flag
       }, 600); 
     }
   };
 
-  if (!pokemon) {
-    return null
-  }
+  // console.log(pokemon)
+  // if (pokemon.length === 0) {
+  //   console.log("Pokemon is null");
+  //   return null
+  // }
 
   return (
 
