@@ -100,6 +100,10 @@ function PokemonCard({pokemon, index, level=false, sidebar=false}) {
     }
   };
 
+  if (!pokemon) {
+    return null
+  }
+
   return (
 
       <div className='card-container' key={index}>
@@ -107,7 +111,7 @@ function PokemonCard({pokemon, index, level=false, sidebar=false}) {
           {level && <img className='pokemon-level' src={levels[`lv${pokemon.level}`]} alt='level' />}
           <h3 className='hp'>HP: {pokemon.hp}</h3>
           <div> 
-            <h3 className='pokemon-name'>{pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}</h3>
+            <h3 className='pokemon-name'>{pokemon?.name[0].toUpperCase() + pokemon?.name.slice(1)}</h3>
           </div>
           <img src={pokemon.image} alt={pokemon.name} className='pokemon-poster-img'/>
           {/* <img src={heartImg} alt={pokemon.name} className='pokemon-poster-img card-heart'onClick={handleHeartClick}/> */}

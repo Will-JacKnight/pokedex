@@ -41,7 +41,7 @@ const Sidebar = () => {
     }
   };
 
-//   console.log(favourite);
+  console.log(favourite);
 
   const pokemonEl = favourite?.map((pokemon, index) => {
     return (

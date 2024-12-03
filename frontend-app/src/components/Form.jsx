@@ -8,6 +8,7 @@ function Form({handlePasswordChange, handleUsernameChange, handleSubmit, usernam
                     value={username}
                     onChange={handleUsernameChange}
                     className='username-input'
+                    required
                 />
 
                 <input 
@@ -16,6 +17,7 @@ function Form({handlePasswordChange, handleUsernameChange, handleSubmit, usernam
                     value={password}
                     onChange={handlePasswordChange}
                     className='password-input'
+                    required
                 />
                 {login && credentialsError && <p className='form-error-msg'>Incorrect Credentials</p>}
                 {!login && credentialsError && <p className='form-error-msg'>Username already exists</p>}
