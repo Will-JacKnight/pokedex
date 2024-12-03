@@ -32,9 +32,8 @@ def show_login_page():
 
 @app.route('/register', methods=['POST'])
 def register_user():
-    data = request.form
-    username = data.get('username')
-    password = data.get('password')
+    username = request.form.get('username')
+    password = request.form.get('password')
     
     if not username or not password: 
         return jsonify({"error": "Username and password are required"}), 400
@@ -70,9 +69,8 @@ def login_user():
         return jsonify({"error": "Invalid username or password"}), 401
 
   # Verify the password
-    if not bcrypt.checkpw(password.encode('utf-8'), user['password'].encode('utf-8')):
+    if not user or validate_password(password, user["password"]):
         return jsonify({"error": "Invalid username or password"}), 401
-
 
     # Successful login
     return jsonify({"message": "Login successful", "user": {"id": user['id'], "username": user['username']}}), 200
@@ -80,9 +78,8 @@ def login_user():
 
 @app.route('/favorite', methods=['POST'])
 def favorite_pokemon():
-    data = request.json
-    user_id = data.get('user_id')
-    pokemon_name = data.get('pokemon_name')
+    user_id = request.json.get('user_id')
+    pokemon_name = request.json.get('pokemon_name')
 
     if not user_id or not pokemon_name:
         return jsonify({"error": "User ID and Pokemon name are required"}), 400
@@ -140,8 +137,20 @@ def remove_favorite():
             return jsonify({"error": str(e)}), 500
 
 
+# helper function to validate password stored in database
+def validate_password(input_password: str, stored_password: str) -> bool:
+    """
+        Verify the input password against the stored hashed password.
+
+        :param input_password: The password provided by the user.
+        :param stored_password: The hashed password stored in the database.
+        :return: True if the password matches, False otherwise.
+    """
+    return bcrypt.checkpw(input_password.encode('utf-8'), stored_password.encode('utf-8'))
+
+
 # Function to fetch Pokémon name and types from the PokeAPI
-def get_pokemon_data(pokemon_name):
+def get_pokemon_data(pokemon_name: str) -> dict:
     url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name.lower()}"
     response = requests.get(url)
     
@@ -158,13 +167,13 @@ def get_pokemon_data(pokemon_name):
     else:
         return None
 
-def fetch_data_from_users_table():
-    try:
-        # Test fetching data from the "users" table
-        response = supabase_client.table("users").select("*").execute()
-        return {"data": response.data}, 200
-    except Exception as e:
-        return {"error": str(e)}, 500
+# def fetch_data_from_users_table():
+#     try:
+#         # Test fetching data from the "users" table
+#         response = supabase_client.table("users").select("*").execute()
+#         return {"data": response.data}, 200
+#     except Exception as e:
+#         return {"error": str(e)}, 500
 
 
 if __name__ == "__main__":

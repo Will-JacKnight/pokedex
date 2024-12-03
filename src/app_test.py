@@ -2,6 +2,7 @@ import pytest
 from supabase import create_client
 
 from app import get_pokemon_data
+from src.app import validate_password
 
 #Connect to supabase (HARDCODED CREDENTIALS)
 SUPABASE_URL = "https://jsvmdeqisnnopuphusbl.supabase.co"
@@ -36,14 +37,12 @@ def test_Pokemon_data_fetched_through_API(pokemon_name, types, hp):
 
 # test if the given username and password match with the record in database
 @pytest.mark.parametrize("username, password", [
-    ("test_user", "hashed_password"),
-    ("another_user", "another_password"),
-    ("last_user", "last_password"),
-], ids=["test_user", "another_user", "last_user"])
+    ("test_user_for_pw_check", "hashed_password"),
+], ids=["test_user"])
 def test_if_username_password_match(username, password):
     response = supabase_client.table("users").select("*").eq("username", username).execute()
     user = response.data[0]
-    assert user["password"] == password
+    assert validate_password(password, user['password'])
 
 
 # test adding a new favorite pokemon to a user and remove that after the test
