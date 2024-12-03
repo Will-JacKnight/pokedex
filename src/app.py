@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-import requests, bcrypt
+import requests, bcrypt             # bcrypt for password hashing
 from supabase import create_client
 
 #Connect to supabase (HARDCODED CREDENTIALS)
