@@ -1,8 +1,7 @@
 import pytest
 from supabase import create_client
 
-from app import get_pokemon_data
-from src.app import validate_password
+from app import get_pokemon_data, validate_password
 
 #Connect to supabase (HARDCODED CREDENTIALS)
 SUPABASE_URL = "https://jsvmdeqisnnopuphusbl.supabase.co"
