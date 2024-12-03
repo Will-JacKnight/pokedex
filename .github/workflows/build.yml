@@ -11,7 +11,7 @@ jobs:
         with:
           python-version: 3.12
       - name: Install requirements
-        run: pip install -r requirements.txt
+        run: pip install -r backend/requirements.txt
       - name: black formatting
         run: black .
 #      - name: Run flake8
@@ -28,9 +28,9 @@ jobs:
         with:
           python-version: 3.12
       - name: Install requirements
-        run: pip install -r requirements.txt
+        run: pip install -r backend/requirements.txt
       - name: Run pytest
-        run: pytest src/app_test.py
+        run: pytest backend/app_test.py
 
   deploy-to-impaas:
     needs: unit-testing
