@@ -27,13 +27,11 @@ function Details() {
 
   const currentPokemon = data?.find(pokemon => pokemon.name === pokemon_name);
 
+  console.log(data);
   const pokemonEl = data?.map((pokemon, index) => {
     if (pokemon.name !== pokemon_name) {
     return (
-      <Link key={index} to={`/details/${pokemon.name}`}>
         <PokemonCard pokemon={pokemon} index={index} level={true}></PokemonCard>
-      </Link>
-      
     );
   } else{
     return null

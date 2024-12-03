@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, send_from_directory, request
-from flask_jwt_extended import JWTManager, create_access_token
+from flask_jwt_extended import JWTManager, create_access_token, get_jwt_identity, jwt_required
 from flask_cors import CORS
 from utility.getApiData import fetch_pokemons_with_details
 from utility.getApiData import get_pokemon_details_by_name
@@ -8,9 +8,11 @@ app = Flask(__name__, static_folder='frontend', static_url_path="")
 CORS(app)  # Enable Cross-Origin Resource Sharing for React
 
 app.config["JWT_SECRET_KEY"] = "your-secret-key"  # Replace with a secure key
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = 3600  # Access token expires in 1 hour
 jwt = JWTManager(app)
 
 users = []
+favourites = [{"username" : "yash", "pokemon" : ["pikachu", "charizard", "bulbasaur", "charmander"] }, {"username" : "riya", "pokemon" : "charmander"}, {"username" : "kevin", "pokemon" : ["bulbasaur"]}]
 
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
@@ -54,6 +56,56 @@ def signup():
     else:
         return jsonify({"success": False, "message" : "data was not received properly"})
 
+@app.route('/favourite', methods=['GET'])
+@jwt_required()
+def favourite():
+    # data = request.json
+    # token = data.get("access_token")
+    username = get_jwt_identity()
+    pokemon = ''
+    result = {}
+    for user in favourites:
+        if user["username"] == username:
+            i = 0
+            for pokemon in user["pokemon"]:
+            # print(user["pokemon"])
+                pokemons_details = get_pokemon_details_by_name(pokemon)
+                result[i] = pokemons_details
+                i += 1
+            break
+    print(result)
+    return jsonify(result)
+
+@app.route('/addFavourite', methods=['POST'])
+@jwt_required()
+def add_favourite():    
+    username = get_jwt_identity()
+    data = request.json
+    pokemon_name = data.get("pokemon_name")
+
+    for user in favourites:
+        if user['username'] == username:
+            if not pokemon_name in user["pokemon"]:
+                user["pokemon"].append(pokemon_name)
+            break
+    
+    return jsonify({"success": True})
+
+
+@app.route('/removeFavourite', methods=['POST'])
+@jwt_required()
+def remove_favourite():    
+    username = get_jwt_identity()
+    data = request.json
+    pokemon_name = data.get("pokemon_name")
+
+    for user in favourites:
+        if user['username'] == username:
+            if pokemon_name in user['pokemon']:
+                user['pokemon'].remove(pokemon_name)
+            break
+    
+    return jsonify({"success": True})
 
 @app.route('/api/pokemons', methods=['GET'])
 def pokemons():
