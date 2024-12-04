@@ -17,7 +17,7 @@ function Home() {
       setData(JSON.parse(sessionStorage.getItem('pokemons')));
     }
     else {
-      fetch('http://127.0.0.1:5000/api/pokemons')
+      fetch('https://pokedex.impaas.uk/api/pokemons')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

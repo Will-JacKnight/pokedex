@@ -13,7 +13,7 @@ function Details() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     // Fetch data from Flask API using fetch
-    fetch(`http://127.0.0.1:5000/api/pokemon/${pokemon_name}`)
+    fetch(`https://pokedex.impaas.uk/api/pokemon/${pokemon_name}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

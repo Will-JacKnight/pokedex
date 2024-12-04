@@ -10,7 +10,7 @@ function PokemonCard({pokemon, index, level=false, sidebar=false}) {
 
   async function addFavourite(pokemon_name) {
     try {
-      const response = await fetch('http://127.0.0.1:5000/addFavourite', {
+      const response = await fetch('https://pokedex.impaas.uk/addFavourite', {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem('access_token')}`,
@@ -41,7 +41,7 @@ function PokemonCard({pokemon, index, level=false, sidebar=false}) {
 
   async function removeFavourite() {
     try {
-      const response = await fetch('http://127.0.0.1:5000/removeFavourite', {
+      const response = await fetch('https://pokedex.impaas.uk/removeFavourite', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

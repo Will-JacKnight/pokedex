@@ -9,7 +9,7 @@ const Sidebar = () => {
 
   async function handleFavourite() {
     try {
-      const response = await fetch('http://127.0.0.1:5000/favourite', {
+      const response = await fetch('https://pokedex.impaas.uk/favourite', {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('access_token')}`,
