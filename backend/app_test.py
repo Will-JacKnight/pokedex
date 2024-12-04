@@ -42,7 +42,7 @@ def test_fetching_pokemons_with_details(limit, ids, hp):
 # Test if the given username and password match with the record in database
 @pytest.mark.parametrize("username, password", [
     ("test_user_for_pw_check", "hashed_password"),
-], ids=["test_user","yash1"])
+], ids=["test_user"])
 def test_validate_password_with_given_username_from_database(username, password):
     response = supabase_client.table("users").select("*").eq("username", username).execute()
     user = response.data[0]
