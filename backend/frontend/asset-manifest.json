@@ -1,17 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.38879dc2.css",
-    "main.js": "/static/js/main.4077491b.js",
+    "main.css": "/static/css/main.5bed5ba8.css",
+    "main.js": "/static/js/main.1f56e2c9.js",
     "static/media/bg14.jpg": "/static/media/bg14.506540973214bc6d54bc.jpg",
     "static/media/Lv2-text.png": "/static/media/Lv2-text.7358e941017b1d8ff90d.png",
     "static/media/Lv1-text.png": "/static/media/Lv1-text.f1bc3949c1d827ab8eee.png",
+    "static/media/signup-text.png": "/static/media/signup-text.364cf9879d0b2d141b14.png",
     "static/media/Lv3-text.png": "/static/media/Lv3-text.531c58385584184de68e.png",
+    "static/media/login-text.png": "/static/media/login-text.a9109893abdaf8558567.png",
     "static/media/evolutions-text.png": "/static/media/evolutions-text.fcf0fb95f9837d053509.png",
     "static/media/pokemon_logo.png": "/static/media/pokemon_logo.5166988d1206d44b4b92.png",
+    "static/media/login-logout.jpg": "/static/media/login-logout.9db6c60a64c1c55725f0.jpg",
     "static/media/dynamic-style.webp": "/static/media/dynamic-style.4623168c95695ad797d0.webp",
     "static/media/dragon.svg": "/static/media/dragon.9d32757b191cbbaea8d4d418ff5d4ed3.svg",
     "static/media/fire.svg": "/static/media/fire.e0bd7fcab2121e7ac1ffbbe09a3ca5dd.svg",
     "static/media/psychic.svg": "/static/media/psychic.67439878eaa68ee726de9944c7ff9757.svg",
+    "static/media/home-icon-silhouette.svg": "/static/media/home-icon-silhouette.f35255aa4bbf47c196f8f20b9274a4e0.svg",
     "static/media/fairy.svg": "/static/media/fairy.767c2f5699eb5f1120f19c7a76b41a1a.svg",
     "static/media/bug.svg": "/static/media/bug.204df919b74456c6dc729be0aa67759b.svg",
     "static/media/rock.svg": "/static/media/rock.61a8428da62eeab93746d62969c71989.svg",
@@ -23,16 +27,18 @@
     "static/media/poison.svg": "/static/media/poison.43956925ad0376b77c7e3921caa3dc30.svg",
     "static/media/steel.svg": "/static/media/steel.cb91a92a3b5197e2cf61bc66592f42d1.svg",
     "static/media/ground.svg": "/static/media/ground.e567f4fc3f3422598757977865de57d8.svg",
+    "static/media/heart.svg": "/static/media/heart.d6ea78c89d5f3c75fc54b5db99919470.svg",
     "static/media/dark.svg": "/static/media/dark.27fdc7ed2bd3294b9838b1882c20e225.svg",
     "static/media/water.svg": "/static/media/water.b6d13329535e4be9e9b4f8da4694faba.svg",
     "static/media/electric.svg": "/static/media/electric.bc35c5a3faf04b605c00967b94e93693.svg",
     "static/media/grass.svg": "/static/media/grass.e09623e3345d5bf5286f5323dd923c60.svg",
     "static/media/normal.svg": "/static/media/normal.2ba66dd583ebf70eb414a0cfd20a48be.svg",
-    "main.38879dc2.css.map": "/static/css/main.38879dc2.css.map",
-    "main.4077491b.js.map": "/static/js/main.4077491b.js.map"
+    "static/media/search-icon.svg": "/static/media/search-icon.7e96cb8e437d36db68856cfdcc07e305.svg",
+    "main.5bed5ba8.css.map": "/static/css/main.5bed5ba8.css.map",
+    "main.1f56e2c9.js.map": "/static/js/main.1f56e2c9.js.map"
   },
   "entrypoints": [
-    "static/css/main.38879dc2.css",
-    "static/js/main.4077491b.js"
+    "static/css/main.5bed5ba8.css",
+    "static/js/main.1f56e2c9.js"
   ]
 }
