@@ -6,6 +6,9 @@ import eveolutionImg from '../images/evolutions-text.png';
 import icons from '../icons';
 import homeImg from '../images/home-icon-silhouette.svg';
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
+
+
 function Details() {
   const [data, setData] = useState([]);
   const pokemon_name  = useParams().name;
@@ -13,7 +16,7 @@ function Details() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     // Fetch data from Flask API using fetch
-    fetch(`http://127.0.0.1:5000/api/pokemon/${pokemon_name}`)
+    fetch(`${API_BASE_URL}/api/pokemon/${pokemon_name}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

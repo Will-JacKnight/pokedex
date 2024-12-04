@@ -3,13 +3,16 @@ import PokemonCard from "./PokemonCard";
 import { Link } from "react-router-dom";
 import heartImg from "../images/heart.svg";
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
+
+
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [favourite, setFavourite] = useState([]);
 
   async function handleFavourite() {
     try {
-      const response = await fetch('http://127.0.0.1:5000/favourite', {
+      const response = await fetch(`${API_BASE_URL}/favourite`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('access_token')}`,

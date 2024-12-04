@@ -3,6 +3,8 @@ import heartImg from '../images/heart.svg';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useRef } from 'react';
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
+
 
 function PokemonCard({pokemon, index, level=false, sidebar=false}) {
   const doubleClickRef = useRef(false);
@@ -10,7 +12,7 @@ function PokemonCard({pokemon, index, level=false, sidebar=false}) {
 
   async function addFavourite(pokemon_name) {
     try {
-      const response = await fetch('http://127.0.0.1:5000/addFavourite', {
+      const response = await fetch(`${API_BASE_URL}/addFavourite`, {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem('access_token')}`,
@@ -41,7 +43,7 @@ function PokemonCard({pokemon, index, level=false, sidebar=false}) {
 
   async function removeFavourite() {
     try {
-      const response = await fetch('http://127.0.0.1:5000/removeFavourite', {
+      const response = await fetch(`${API_BASE_URL}/removeFavourite`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

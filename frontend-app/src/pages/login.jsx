@@ -3,6 +3,9 @@ import { useState } from 'react';
 import {useNavigate} from 'react-router-dom'
 import Form from '../components/Form';
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
+
+
 function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -20,7 +23,7 @@ function Login() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        const response = await fetch('http://127.0.0.1:5000/login', {
+        const response = await fetch(`${API_BASE_URL}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

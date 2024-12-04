@@ -6,6 +6,9 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import Sidebar from '../components/Sidebar';
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
+console.log(API_BASE_URL);
+
 
 function Home() {
   const [data, setData] = useState([]);
@@ -17,7 +20,7 @@ function Home() {
       setData(JSON.parse(sessionStorage.getItem('pokemons')));
     }
     else {
-      fetch('http://127.0.0.1:5000/api/pokemons')
+      fetch(`${API_BASE_URL}/api/pokemons`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
