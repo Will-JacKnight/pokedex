@@ -1,8 +1,9 @@
 {
   "files": {
-    "main.css": "/static/css/main.5bed5ba8.css",
-    "main.js": "/static/js/main.1f56e2c9.js",
+    "main.css": "/static/css/main.9f9876c6.css",
+    "main.js": "/static/js/main.8064fd7f.js",
     "static/media/bg14.jpg": "/static/media/bg14.506540973214bc6d54bc.jpg",
+    "static/media/sad-pikachu.gif": "/static/media/sad-pikachu.a302469348004d297aa4.gif",
     "static/media/Lv2-text.png": "/static/media/Lv2-text.7358e941017b1d8ff90d.png",
     "static/media/Lv1-text.png": "/static/media/Lv1-text.f1bc3949c1d827ab8eee.png",
     "static/media/signup-text.png": "/static/media/signup-text.364cf9879d0b2d141b14.png",
@@ -16,10 +17,10 @@
     "static/media/fire.svg": "/static/media/fire.e0bd7fcab2121e7ac1ffbbe09a3ca5dd.svg",
     "static/media/psychic.svg": "/static/media/psychic.67439878eaa68ee726de9944c7ff9757.svg",
     "static/media/home-icon-silhouette.svg": "/static/media/home-icon-silhouette.f35255aa4bbf47c196f8f20b9274a4e0.svg",
+    "index.html": "/index.html",
     "static/media/fairy.svg": "/static/media/fairy.767c2f5699eb5f1120f19c7a76b41a1a.svg",
     "static/media/bug.svg": "/static/media/bug.204df919b74456c6dc729be0aa67759b.svg",
     "static/media/rock.svg": "/static/media/rock.61a8428da62eeab93746d62969c71989.svg",
-    "index.html": "/index.html",
     "static/media/ice.svg": "/static/media/ice.cd2f90437e3fe39235a9adca860ce2d2.svg",
     "static/media/ghost.svg": "/static/media/ghost.ddf268314aed78d0524d47aa90e49187.svg",
     "static/media/flying.svg": "/static/media/flying.d17785038a59f3ce2121e423a2ded0f7.svg",
@@ -34,11 +35,12 @@
     "static/media/grass.svg": "/static/media/grass.e09623e3345d5bf5286f5323dd923c60.svg",
     "static/media/normal.svg": "/static/media/normal.2ba66dd583ebf70eb414a0cfd20a48be.svg",
     "static/media/search-icon.svg": "/static/media/search-icon.7e96cb8e437d36db68856cfdcc07e305.svg",
-    "main.5bed5ba8.css.map": "/static/css/main.5bed5ba8.css.map",
-    "main.1f56e2c9.js.map": "/static/js/main.1f56e2c9.js.map"
+    "static/media/closeSymbol.svg": "/static/media/closeSymbol.30508a6d00696f2dc5c6347d3462a2ee.svg",
+    "main.9f9876c6.css.map": "/static/css/main.9f9876c6.css.map",
+    "main.8064fd7f.js.map": "/static/js/main.8064fd7f.js.map"
   },
   "entrypoints": [
-    "static/css/main.5bed5ba8.css",
-    "static/js/main.1f56e2c9.js"
+    "static/css/main.9f9876c6.css",
+    "static/js/main.8064fd7f.js"
   ]
 }

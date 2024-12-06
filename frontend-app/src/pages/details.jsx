@@ -5,17 +5,21 @@ import PokemonCard from '../components/PokemonCard';
 import eveolutionImg from '../images/evolutions-text.png';
 import icons from '../icons';
 import homeImg from '../images/home-icon-silhouette.svg';
+import sadPikachuImg from '../images/sad-pikachu.gif'
+import {ClipLoader} from 'react-spinners';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
 
 function Details() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const pokemon_name  = useParams().name;
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     // Fetch data from Flask API using fetch
+    setLoading(true);
     fetch(`${API_BASE_URL}/api/pokemon/${pokemon_name}`)
       .then(response => {
         if (!response.ok) {
@@ -24,13 +28,45 @@ function Details() {
         return response.json();
       })
       .then(rec_data => setData(Object.values(rec_data))) // convert dictionary to array and store in data state
-      .catch(error => console.error('Error fetching data:', error));
+      .catch(error => console.error('Error fetching data:', error)).finally(() => {
+        setLoading(false);
+      });
+
   }, [pokemon_name]);
 
 
-  const currentPokemon = data?.find(pokemon => pokemon.name === pokemon_name);
 
-  console.log(data);
+  if(loading) {
+    return (
+      <div className="container">
+      <Link to='/'><img src={homeImg} className='home-icon' alt="home icon" /></Link>
+        <img src={titleImg} alt='title' className='title-img'/>
+        <div className='pokemon-profile'>
+          <ClipLoader
+          color={"black"}
+                size={50}
+              />
+        </div>
+      </div>
+    );
+  }
+
+  if(data.length === 0) {
+    console.log("Is this not run??")
+    return (
+      
+      <div className='container'>
+        <Link to='/'><img src={homeImg} className='home-icon' alt="home icon" /></Link>
+        <img src={titleImg} alt='title' className='title-img'/>
+        <div className='pokemon-profile'>
+         <h1>Pokemon not found</h1>
+         <img src={sadPikachuImg} alt="Crying pikachu gif" className='sad-pikachu' />
+        </div>
+      </div>
+    )
+  }
+
+  const currentPokemon = data?.find(pokemon => pokemon.name === pokemon_name);
   const pokemonEl = data?.map((pokemon, index) => {
     if (pokemon.name !== pokemon_name) {
     return (

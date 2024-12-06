@@ -59,6 +59,7 @@ a {
   top: -10px;
   left: 20px;
   cursor: pointer;
+  scale: 1.2;
 }
 
 .pokemon-poster-list {
@@ -123,6 +124,9 @@ a {
 .pokemon-stats p {
   margin: 0 5px;
 }
+.loader {
+  margin-top: 150px;
+}
 
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -148,6 +152,7 @@ a {
   font-family: "Roboto", sans-serif;
   font-size: 20px;
   border-radius: 20px;
+  min-height: 600px;
 }
 
 .pokemon-profile h2 {
@@ -233,6 +238,14 @@ a {
   padding: 9px;
 }
 
+.sad-pikachu {
+  display: block;
+  width: 300px;
+  height: 200px;
+  object-fit:cover;
+  border-radius: 10px;
+}
+
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------
   SEARCH BAR
 ------------------------------------------------------------------------------------------------------------------------------------------------------ */
@@ -287,6 +300,7 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 
 }
 
@@ -338,13 +352,14 @@ a {
 .toggle-button {
   position: absolute;
   top: -10px;
-  left: 70px;
+  left: 80px;
   width: 42px;
   z-index: 1000;
   background-color: ghostwhite;
   cursor: pointer;
   border-radius: 50%;
   padding: 10px;
+  scale: 1.2;
 }
 
 /* Sidebar styling */
@@ -362,6 +377,8 @@ a {
   overflow-y: auto;
   z-index: 1000;
   /* display: ; */
+  text-align: center;
+  padding-top: 50px;
 }
 
 .sidebar.open {
@@ -378,11 +395,14 @@ a {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
 }
-
+.add-favourite-msg {
+  font-weight: 400;
+  margin: 20px 0px;
+}
 .close-sidebar {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 15px;
+  right: 15px;
   padding: 10px;
   cursor: pointer;
 }

@@ -2,16 +2,17 @@ import { useEffect, useState } from 'react';
 import titleImg from '../images/pokemon_logo.png';
 import accoutImg from '../images/login-logout.jpg';
 import PokemonCard from '../components/PokemonCard';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import Sidebar from '../components/Sidebar';
+import { ClipLoader } from 'react-spinners';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
-console.log(API_BASE_URL);
-
 
 function Home() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,6 +21,7 @@ function Home() {
       setData(JSON.parse(sessionStorage.getItem('pokemons')));
     }
     else {
+      setLoading(true);
       fetch(`${API_BASE_URL}/api/pokemons`)
       .then(response => {
         if (!response.ok) {
@@ -32,7 +34,9 @@ function Home() {
         setData(Object.values(arrData)); // convert dictionary to array and store in data state
         sessionStorage.setItem('pokemons', JSON.stringify(arrData));
       })
-      .catch(error => console.error('Error fetching data:', error));
+      .catch(error => console.error('Error fetching data:', error)).finally(() => {
+        setLoading(false);
+      });
     }
     
   }, []);
@@ -47,7 +51,6 @@ function Home() {
     }
   }
   
-  console.log(data);
   const pokemonEl = data?.map((pokemon, index) => {
     return (
       // <Link key={index} to={`/details/${pokemon.name}`}>
@@ -56,7 +59,7 @@ function Home() {
       // </Link>
     );
   })
-
+  
     return (
       <>
       <div className="container">
@@ -65,9 +68,17 @@ function Home() {
         <img src={titleImg} alt='title' className='title-img'/>
         <img src={accoutImg} alt='title' className='accout-img' onClick={handleAccountClick}/>
 
-         <div className='pokemon-poster-list'>
-              {pokemonEl}
-          </div>  
+   
+        <div className='pokemon-poster-list'>
+            {loading && <ClipLoader
+                  color={"white"}
+                  size={100}
+                  className='loader'
+                />
+            }
+            {!loading && pokemonEl}
+        </div> 
+        
       </div>
       </>
     

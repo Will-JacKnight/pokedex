@@ -10,6 +10,8 @@ function SignUp() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [credentialsError, setCredentialsError] = useState(false);
+    const [loading, setLoading] = useState(false);
+
 
     const navigate = useNavigate();
 
@@ -23,6 +25,7 @@ function SignUp() {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        setLoading(true);
         const response = await fetch(`${API_BASE_URL}/signup`, { 
             method: 'POST',
             headers: {
@@ -34,6 +37,7 @@ function SignUp() {
             }),
         });
         const data = await response.json();
+        setLoading(false);
         if(data.success) {
             setCredentialsError(false);
             sessionStorage.setItem('access_token', data.access_token);
@@ -56,6 +60,7 @@ function SignUp() {
             password={password}
             login={false}
             credentialsError={credentialsError}
+            loading={loading}
         />
     </div>
     </>
