@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import searchImg from "../images/search-icon.svg"
 
-// Searchbar component for home and results page
+// Searchbar component
 export default function SearchBar() {
 
     const [searchQuery, setSearchQuery] = useState("") // the user search string
@@ -17,10 +17,7 @@ export default function SearchBar() {
     function handleSubmit(e) {
         e.preventDefault()
         setSearchQuery("")
-        sessionStorage.setItem("searchQuery", searchQuery)
         navigate(`/details/${searchQuery.toLowerCase()}`)
-        // The navigation state with a random number, is used solely to force a re-render of the results page.
-        // This is necessary when the user is searching for movie/show directly from the results page
     }
     // JSX for searchbar
     return (

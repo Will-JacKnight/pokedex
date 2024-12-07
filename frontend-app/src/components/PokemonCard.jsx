@@ -1,23 +1,27 @@
 import {levels} from '../icons';
-import heartImg from '../images/heart.svg';
-import { Link, useNavigate } from 'react-router-dom';
-import { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
+// pokemon card component
 
 function PokemonCard({pokemon, index, level=false, sidebar=false}) {
-  const doubleClickRef = useRef(false);
-  const navigate = useNavigate();
+  const doubleClickRef = useRef(false); // used to track double click
+  const navigate = useNavigate(); // used to navigate to other pages
 
+  // function to add pokemon to favourites list of user
   async function addFavourite(pokemon_name) {
+    // psot request to backend to add pokemon to favourites list of user
     try {
       const response = await fetch(`${API_BASE_URL}/addFavourite`, {
         method: 'POST',
+        // include JWT token in header for authentication
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem('access_token')}`,
             'Content-Type': 'application/json',
         },
+        // send pokemon_name to be added to favourites list
         body: JSON.stringify({
             "pokemon_name": pokemon_name,
         }),
@@ -26,11 +30,13 @@ function PokemonCard({pokemon, index, level=false, sidebar=false}) {
         throw response;
       }
       const data = await response.json();
+      // if response is successful, tell user that pokemon was added to favourites list
       if(data.success) {
         alert("You have added this pokemon to your favourites successfully!");
       }
     }
     catch(reponse) {
+      // if response is not successful, remove JWT token and tell user to login again
       if (reponse.status === 401) {
         sessionStorage.removeItem('access_token');
         alert('Token issue. Please login again');
@@ -41,14 +47,18 @@ function PokemonCard({pokemon, index, level=false, sidebar=false}) {
     }
   }
 
+  // function to remove pokemon from favourites list of user
   async function removeFavourite() {
     try {
+      // post request to backend to remove pokemon from favourites list of user
       const response = await fetch(`${API_BASE_URL}/removeFavourite`, {
         method: 'POST',
+        // include JWT token in header for authentication
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${sessionStorage.getItem('access_token')}`
         },
+        // send pokemon_name to be removed from favourites list
         body: JSON.stringify({
             "pokemon_name": pokemon.name,
         }),
@@ -57,13 +67,16 @@ function PokemonCard({pokemon, index, level=false, sidebar=false}) {
         throw response;
       }
       const data = await response.json();
+      // if response is successful, navigate to home page and refresh page
       if(data.success) {
           navigate('/',  { state: { refresh: Date.now() } });
           window.location.reload();
+          // tell user that pokemon was removed from favourites list
           alert("You have removed this pokemon from your favourites successfully!");
       }
     }
     catch(reponse) {
+      // if response is not successful, remove JWT token and tell user to login again
       if (reponse.status === 401) {
         sessionStorage.removeItem('access_token');
         alert('Token issue. Please login again');
@@ -76,17 +89,22 @@ function PokemonCard({pokemon, index, level=false, sidebar=false}) {
 
   let clickTimeout = null;
 
+  // function to handle click on pokemon card
+  // on single click, navigate to details page
   const handleClick = () => {
     if (clickTimeout) {
       clearTimeout(clickTimeout); // Cancel the single-click timer
     }
     clickTimeout = setTimeout(() => {
       if (!doubleClickRef.current) {
-        navigate(`/details/${pokemon.name}`); // Only navigate if no double-click occurred
+        navigate(`/details/${pokemon.name}`);
       }
-    }, 600); // Adjust delay to fit double-click recognition timing
+    }, 600); // after delay, if no double click, navigate to details page
   };
   
+  // function to handle double click on pokemon card
+  // on double click, add pokemon to favourites list of user
+  // if not logged in, tell user to login
   const handleDoubleClick = () => {
     if (!sidebar) {
       if (clickTimeout) {
@@ -94,9 +112,11 @@ function PokemonCard({pokemon, index, level=false, sidebar=false}) {
         clickTimeout = null;
       }
       doubleClickRef.current = true; // Mark that a double-click occurred
+      // if user is logged in, add pokemon to favourites list of user
       if(sessionStorage.getItem('access_token')) {
         addFavourite(pokemon.name);
       }
+      // if user is not logged in, tell user to login
       else {
         alert("Please login to add pokemons to your favourites");
       }
@@ -106,12 +126,7 @@ function PokemonCard({pokemon, index, level=false, sidebar=false}) {
     }
   };
 
-  // console.log(pokemon)
-  // if (pokemon.length === 0) {
-  //   console.log("Pokemon is null");
-  //   return null
-  // }
-
+  // return the JSX for the pokemon card
   return (
 
       <div className='card-container' key={index}>

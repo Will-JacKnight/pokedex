@@ -12,14 +12,15 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:500
 
 
 function Details() {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const pokemon_name  = useParams().name;
+  const [data, setData] = useState([]); // state to store data
+  const [loading, setLoading] = useState(false); // state to store loading status
+  const pokemon_name  = useParams().name; // pokemon name from url
 
+  // useEffect to fetch pokemon data from backend
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     // Fetch data from Flask API using fetch
-    setLoading(true);
+    setLoading(true); // set loading to true
     fetch(`${API_BASE_URL}/api/pokemon/${pokemon_name}`)
       .then(response => {
         if (!response.ok) {
@@ -29,13 +30,13 @@ function Details() {
       })
       .then(rec_data => setData(Object.values(rec_data))) // convert dictionary to array and store in data state
       .catch(error => console.error('Error fetching data:', error)).finally(() => {
-        setLoading(false);
+        setLoading(false); // set loading to false
       });
 
-  }, [pokemon_name]);
+  }, [pokemon_name]); // useEffect to fetch data when pokemon_name changes
 
 
-
+  // if loading is true, show loader
   if(loading) {
     return (
       <div className="container">
@@ -51,8 +52,8 @@ function Details() {
     );
   }
 
+  // if data is empty, show not found message
   if(data.length === 0) {
-    console.log("Is this not run??")
     return (
       
       <div className='container'>
@@ -66,7 +67,9 @@ function Details() {
     )
   }
 
+  // find current pokemon in data array
   const currentPokemon = data?.find(pokemon => pokemon.name === pokemon_name);
+  // map over the evolutions array to render PokemonCard components exluding current pokemon
   const pokemonEl = data?.map((pokemon, index) => {
     if (pokemon.name !== pokemon_name) {
     return (
@@ -78,12 +81,14 @@ function Details() {
   })
 
 
+  // map over the types array to render type icons
   const typeEl = currentPokemon?.types.map((type, index) => {
     return (
         <img key={index}src={icons[type]} alt={type} className='type-icon'/>
     );
   })
 
+  // map over the abilities array to render ability text with specific styling
   const abilitiesEl = currentPokemon?.abilities.map((ability, index) => {
     return (
       <div key={index} className='ability'>
@@ -92,6 +97,7 @@ function Details() {
     );
   })
 
+  // map over the moves array to render move text wiht specific styling
   const movesEl = currentPokemon?.moves.map((move, index) => {
     return (
       <div key={index} className='move'>
@@ -100,6 +106,7 @@ function Details() {
     );
   })
 
+  // returning the JSX for the details page
   return (
     <>
       <div className="container">

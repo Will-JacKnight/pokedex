@@ -107,19 +107,6 @@ def favourite():
         #Handle unexpected errors
         return jsonify({"error": str(e)}), 500
 
-    # # pokemon = ''
-    # result = {}
-    # for user in favourites:
-    #     if user["username"] == username:
-    #         i = 0
-    #         for pokemon in user["pokemon"]:
-    #         # print(user["pokemon"])
-    #             pokemons_details = get_pokemon_details_by_name(pokemon)
-    #             result[i] = pokemons_details
-    #             i += 1
-    #         break
-    # print(result)
-    # return jsonify(result)
 
 # add favourite
 @app.route('/addFavourite', methods=['POST'])
@@ -137,13 +124,6 @@ def add_favourite():
     response = supabase_client.table("favorites").insert({"username": username, "pokemon_name": pokemon_name}).execute()
     return jsonify({"success": True}), 200 # send message that pokemon was made favourite
 
-    # for user in favourites:
-    #     if user['username'] == username:
-    #         if not pokemon_name in user["pokemon"]:
-    #             user["pokemon"].append(pokemon_name)
-    #         break
-    
-    # return jsonify()
 
 # remove favourite
 @app.route('/removeFavourite', methods=['POST'])
@@ -166,14 +146,6 @@ def remove_favourite():
     except Exception as e:
             #Handle unexpected errors
             return jsonify({"error": str(e)}), 500
-
-    # for user in favourites:
-    #     if user['username'] == username:
-    #         if pokemon_name in user['pokemon']:
-    #             user['pokemon'].remove(pokemon_name)
-    #         break
-    
-    # return jsonify({"success": True})
 
 @app.route('/api/pokemons', methods=['GET'])
 def pokemons():

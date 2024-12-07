@@ -1,22 +1,23 @@
 import requests
 
+# This function is used to process the pokemon details and return a dictionary with the required details
 def processPokemon(pokemon_data):
-    # Fetch Pokémon species details for description and evolution chain
+    # Fetch Pokémon species details for description and evolution chain using the species url
     species_response = requests.get(pokemon_data['species']['url'])
     species_data = species_response.json()
 
-    # Fetch evolution chain
+    # Fetch evolution chain using the evolution chain url
     evolution_chain_response = requests.get(species_data['evolution_chain']['url'])
     evolution_chain_data = evolution_chain_response.json()
 
-    # Traverse evolution chain
+    # loop through the evolution chain and append the species names to a list
     evolution_chain = []
     current = evolution_chain_data['chain']
     while current:
         evolution_chain.append(current['species']['name'])
         current = current['evolves_to'][0] if current['evolves_to'] else None
 
-    # Extract required details
+    # Extract required details from the pokemon_data dictionary
     details = {
         "name": pokemon_data["name"],
         "id": pokemon_data["id"],
@@ -40,102 +41,38 @@ def processPokemon(pokemon_data):
     return details
 
 
-
+# This function is used to fetch the details of a pokemon by its name
 def get_pokemon_details_by_name(pokemon_name):    
-    # Fetch Pokémon details
+    # This api endpoint returns directly a dictionary with the pokemon details
     pokemon_response = requests.get(f"https://pokeapi.co/api/v2/pokemon/{pokemon_name.lower()}")
     if pokemon_response.status_code != 200:
         return {"error": f"Pokémon '{pokemon_name}' not found!"}
     pokemon_data = pokemon_response.json()
-    # print(pokemon_data)
+    # call the processPokemon function to process the pokemon details
     processed_data = processPokemon(pokemon_data)
+    # returning the processed pokemon details
     return processed_data
 
 
-
+# Used to fetch a certan number of pokemons with their details
+# limit is the number of pokemons to be fetched
 def fetch_pokemons_with_details(limit=5):
     url = f"https://pokeapi.co/api/v2/pokemon?limit={limit}"
     response = requests.get(url)
     if response.status_code != 200:
         print("Error fetching data.")
         return []
-    
+    # this api endpoint returns a list of pokemons with a url to their details
     pokemon_list = response.json()["results"]
     result = []
-    # print(pokemon_list[0:3])
     
+    # looping through the list of pokemons and fetching their details using the url
     for pokemon in pokemon_list:
         pokemon_data = requests.get(pokemon["url"]).json()
 
         processed_data = processPokemon(pokemon_data)
         result.append(processed_data)
 
+    # returning the list of pokemons with their details
     return result
 
-
-
-# # funciton to fetch pokemon data from api
-# def fetch_pokemons_with_details(limit=3):
-#     url = f"https://pokeapi.co/api/v2/pokemon?limit={limit}"
-#     response = requests.get(url)
-#     if response.status_code != 200:
-#         print("Error fetching data.")
-#         return []
-    
-#     pokemon_list = response.json()["results"]
-#     result = []
-    
-#     for pokemon in pokemon_list:
-#         pokemon_data = requests.get(pokemon["url"]).json()
-        
-#         # Extract basic fields
-#         name = pokemon_data["name"]
-#         image = pokemon_data["sprites"]["front_default"]
-#         hp = next(stat["base_stat"] for stat in pokemon_data["stats"] if stat["stat"]["name"] == "hp")
-#         attack = next(stat["base_stat"] for stat in pokemon_data["stats"] if stat["stat"]["name"] == "attack")
-#         defense = next(stat["base_stat"] for stat in pokemon_data["stats"] if stat["stat"]["name"] == "defense")
-#         speed = next(stat["base_stat"] for stat in pokemon_data["stats"] if stat["stat"]["name"] == "speed")
-#         weight = pokemon_data["weight"]  # Weight in hectograms (hgs)
-#         types = [t["type"]["name"] for t in pokemon_data["types"]]
-#         abilities = [a["ability"]["name"] for a in pokemon_data["abilities"]]
-#         moves = [m["move"]["name"] for m in pokemon_data["moves"]]
-        
-#         # Fetch description from species endpoint
-#         species_url = pokemon_data["species"]["url"]
-#         species_data = requests.get(species_url).json()
-
-#         evolution_chain_url = species_data["evolution_chain"]["url"]
-#         evolution_chain_data = requests.get(evolution_chain_url).json()
-
-#         evolution_chain = []
-#         current = evolution_chain_data['chain']
-#         while current:
-#             evolution_chain.append(current['species']['name'])
-#             if current['evolves_to']:
-#                 current = current['evolves_to'][0]
-#             else:
-#                 current = None
-
-#         descriptions = [
-#             entry["flavor_text"] for entry in species_data["flavor_text_entries"] 
-#             if entry["language"]["name"] == "en"
-#         ]
-#         description = descriptions[0].replace("\n", " ").replace("\f", " ") if descriptions else "No description available."
-        
-#         # Add to results
-#         result.append({
-#             "name": name,
-#             "image": image,
-#             "hp": hp,
-#             "attack": attack,
-#             "defense": defense,
-#             "speed": speed,
-#             "weight": weight,
-#             "types": types,
-#             "abilities": abilities,
-#             "moves": moves,
-#             "description": description, 
-#              "evolution_chain": evolution_chain
-#         })
-    
-#     return result
